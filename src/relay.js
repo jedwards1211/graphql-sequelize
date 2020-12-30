@@ -181,7 +181,7 @@ function tupleComparison(model, attributes, inequality, values) {
   const attributesStr = attributes.map(attribute => QueryGenerator.quoteIdentifier(attribute)).join(', ');
   const escapeOptions = {context: 'SELECT'};
   const valuesStr = attributes.map((attribute, i) =>
-    QueryGenerator.escape(values[i], model.attributes[attribute], escapeOptions)
+    QueryGenerator.escape(values[i], model.rawAttributes[attribute], escapeOptions)
   ).join(', ');
   return sequelize.literal(`(${attributesStr}) ${inequality} (${valuesStr})`);
 }
